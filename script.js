@@ -42,18 +42,18 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function sendWhatsAppMessage() {
-    const name = document.getElementById('name').value;
-    const phone = document.getElementById('phone').value;
-    const message = document.getElementById('message').value;
+    const name = document.getElementById('name').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const message = document.getElementById('message').value.trim();
 
-    // Basic validation
     if (!name || !phone || !message) {
-        alert('Please fill in Name, Phone Number, and Your Message fields.');
+        alert('Please fill in Name, Phone Number, and Your Message.');
         return;
     }
-    const yourWhatsAppNumber = '8127356940';
 
-    const whatsappMessage = `New Inquiry from Kids Play Hall Website:\n\nName: ${name}\nMobile: ${phone}\nEmail: ${email || 'Not provided'}\nMessage: ${message}`;
+    const yourWhatsAppNumber = '918127356940'; // With country code
+
+    const whatsappMessage = `New Inquiry from Kids Play Hall Website:\n\nName: ${name}\nPhone: ${phone}\nMessage: ${message}`;
 
     const whatsappUrl = `https://wa.me/${yourWhatsAppNumber}?text=${encodeURIComponent(whatsappMessage)}`;
 
