@@ -10,12 +10,17 @@ body {
     line-height: 1.6;
     color: #333;
     background-color: #f8f8f8; /* Light background */
+    /* --- FIX FOR HORIZONTAL SCROLLING --- */
+    overflow-x: hidden; /* Prevents horizontal scrolling caused by overflowing content */
 }
 
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
+    /* --- POTENTIAL FIX --- */
+    /* Add this if elements inside container are still causing overflow despite other fixes */
+    /* overflow-x: hidden; */
 }
 
 /* Headings */
@@ -132,9 +137,14 @@ header .container {
 }
 
 .logo img {
-    height: 60px; /* Adjust as needed */
-    max-width: 100%;
-    border-radius: 10px; /* Slightly rounded logo */
+    /* --- FIX FOR LOGO STYLING --- */
+    /* Removed max-width: 100% and explicitly set width/height for better control */
+    width: 60px; /* Set a specific width */
+    height: 60px; /* Set a specific height */
+    border-radius: 50%; /* Make it perfectly circular */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Add shadow */
+    border: 2px solid #FFD700; /* Add yellow border */
+    object-fit: cover; /* Ensures the image covers the area without distortion */
 }
 
 nav .nav-links {
@@ -194,6 +204,8 @@ nav .nav-links a:hover::after {
     justify-content: center;
     min-height: 500px;
     position: relative;
+    background-size: cover; /* Ensure background covers the entire section */
+    background-position: center; /* Center the background image */
 }
 
 .hero-section::before {
@@ -333,6 +345,17 @@ nav .nav-links a:hover::after {
     box-shadow: 0 8px 20px rgba(0,0,0,0.2);
 }
 
+.gallery-item {
+    text-align: center; /* Center the caption */
+}
+
+.gallery-item .caption {
+    margin-top: 10px;
+    font-size: 0.95em;
+    color: #555;
+    font-weight: 600;
+}
+
 /* Contact Us Section */
 .contact-grid {
     display: flex;
@@ -412,12 +435,41 @@ nav .nav-links a:hover::after {
     resize: vertical;
 }
 
+/* Specific styling for the WhatsApp button in the form */
 .contact-form button {
-    width: auto;
-    align-self: flex-start;
+    display: inline-flex; /* Use flex to center content */
+    align-items: center; /* Vertically center icon and text */
+    justify-content: center; /* Horizontally center icon and text */
+    background-color: #25D366; /* WhatsApp green */
+    color: #fff;
+    padding: 15px 30px; /* More padding for a bigger button */
+    border-radius: 30px; /* Rounded corners */
+    font-weight: bold;
+    font-size: 1.1em; /* Larger font size */
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15); /* Soft shadow */
+    border: none;
+    cursor: pointer;
+    width: 100%; /* Make it full width in the form */
+    margin-top: 10px; /* Add some space above it */
 }
 
+.contact-form button i {
+    margin-left: 10px; /* Space between text and icon */
+}
+
+.contact-form button:hover {
+    background-color: #128C7E; /* Darker green on hover */
+    transform: translateY(-3px); /* Lift effect on hover */
+    box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+}
+
+
 .google-map iframe {
+    /* --- FIX FOR GOOGLE MAPS IFRAME --- */
+    width: 100%; /* Ensure it takes full width of its parent */
+    max-width: 100%; /* Crucial: Prevents overflow */
+    height: 350px; /* Fixed height for consistent display */
     border-radius: 15px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.08);
 }
@@ -572,9 +624,7 @@ footer .footer-links a {
         grid-template-columns: 1fr; /* Single column layout on small screens */
     }
 
-    .contact-form button {
-        width: 100%; /* Full width button */
-    }
+    /* The .contact-form button rule ensures it's full width on mobile already */
 
     .floating-whatsapp {
         bottom: 20px;
@@ -596,4 +646,78 @@ footer .footer-links a {
         padding: 10px 20px;
         font-size: 0.9em;
     }
+}
+
+.testimonials-section {
+    background: #f7f9fc;
+    padding: 60px 20px;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.testimonials-title {
+text-align: center;
+font-size: 36px;
+color: #da7040;
+margin-bottom: 40px;
+}
+
+.testimonials-container {
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+gap: 30px;
+max-width: 1200px;
+margin: auto;
+}
+
+.testimonial-card {
+background: #fff;
+border-radius: 12px;
+padding: 25px;
+box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+transition: transform 0.3s;
+width: calc(25% - 30px); /* 4 cards per row */
+box-sizing: border-box;
+}
+
+.testimonial-card:hover {
+transform: scale(1.02);
+}
+
+.testimonial-stars {
+font-size: 20px;
+color: #f1c40f;
+margin: 0;
+}
+
+.testimonial-text {
+font-size: 16px;
+color: #333;
+margin-top: 15px;
+}
+
+.testimonial-author {
+margin-top: 20px;
+font-weight: bold;
+color: #2c3e50;
+}
+
+  /* Responsive: 2 cards per row on smaller screens */
+@media (max-width: 992px) {
+    .testimonial-card {
+      width: calc(50% - 30px);
+    }
+}
+
+@media (max-width: 576px) {
+    .testimonial-card {
+        width: 100%;
+    }
+}
+
+.contact-info p a {
+    word-break: break-word;
+    overflow-wrap: break-word;
+    display: inline-block;
+    max-width: 100%;
 }
