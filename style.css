@@ -721,3 +721,29 @@ color: #2c3e50;
     display: inline-block;
     max-width: 100%;
 }
+
+
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+/* Ensure all sections stay within full width */
+* {
+  box-sizing: border-box;
+}
+
+/* Container width should not exceed viewport */
+.container {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Prevent images or other elements from overflowing */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
